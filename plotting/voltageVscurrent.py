@@ -24,13 +24,10 @@ def readParsedFile(filename):
     return V,C,Ind
 
 def makePlot(x,y,col,xlab,ylab,ifig):
-    x = np.asarray(x)
-    #x = np.asarray(x)/20/5 - 1000 + 5
     plt.figure(ifig)
     plt.plot(x,y,color=col)
     plt.yticks(fontsize=12)
-    #plt.xlim([0,90])
-    #plt.xticks(np.linspace(min(x),max(x),5),fontsize=12)
+    plt.xticks(np.linspace(min(x),max(x),5),fontsize=12)
     plt.xlabel(xlab,fontsize=15)
     plt.ylabel(ylab,fontsize=15)
     plt.tight_layout()
@@ -57,20 +54,16 @@ def main():
         i = i+aver
         j = j+1'''
 
-    makePlot(Ind,V,"cornflowerblue",r"$t$ (s)","Voltage monitor (V)",1)
-    makePlot(Ind,C,"cornflowerblue",r"$t$ (s)","Current monitor (A)",2)
-
+    makePlot(C,V,"cornflowerblue","Current monitor (A)","Voltage monitor (V)",1)
     plt.figure(1)
-    plt.savefig('voltage_test.pdf',bbox_inches='tight')
+    plt.axhline(y=0,linestyle='--',color='black')
+    plt.axvline(x=0,linestyle='--',color='black')
+    plt.savefig(str(filename.strip().split("/")[-1].split("_")[0])+".pdf",bbox_inches='tight')
+    #plt.savefig('standard_degauss_z.pdf',bbox_inches='tight')
+    #plt.savefig('xsyczc_degauss.pdf',bbox_inches='tight')
+    #makePlot(Ind,C,"cornflowerblue","Step index (a.u.)","Current monitor (A)",2)
 
-    plt.figure(2)
-    plt.savefig('current_test.pdf',bbox_inches='tight')
 
-
-    #plt.figure(2)
-    #plt.xlim([5,20])
-    #plt.ylim([-0.4,0.4])
-    #plt.savefig('current_zoomed.pdf',bbox_inches='tight')
 
     plt.show()
 
